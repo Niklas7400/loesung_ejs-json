@@ -8,6 +8,7 @@ var fileupload = require('express-fileupload');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var blogRouter = require('./routes/blog');
+var apiRouter = require('./routes/blogApi');
 
 var app = express();
 
@@ -27,7 +28,7 @@ app.use(fileupload({
 }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
+app.use('/api/blog', apiRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
