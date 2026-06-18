@@ -1,0 +1,18 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar', {navItems}) %>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <% if(typeof(username) !== 'undefined' ) { %>
+      <p>Benutzer <%= username %></p>
+    <% } %>
+    <a href="<%= url %>"><%= linkname %></a>
+
+    <% if(typeof(list) !== 'undefined' ) { %>
+      <ol>
+      <% list.forEach(user => { %>
+        <li><span>User: <%= user.name %></span> <span>Alter: <%= user.alter %></span></li>
+      <% }); %>
+      </ol>
+    <% } %>
+
+<%- include('parts/footer') %>

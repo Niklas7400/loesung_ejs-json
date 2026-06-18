@@ -1,0 +1,19 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar', {navItems}) %>
+    <div class="container"></div>
+        <h1 class="bd-title my-4" id="content"><%= title %></h1>
+        
+        <form action="/blog" method="post" enctype="multipart/form-data">
+            <label for="author">Author</label>
+            <input type="text" class="form-control" id="author" name="author">
+            <label for="title">Titel</label>
+            <input type="text" class="form-control" id="title" name="title">
+            <label for="text">Text</label>
+            <textarea class="form-control" id="text" name="text"></textarea>
+            <label for="img">Image</label>
+            <input type="file" class="form-control" id="img" name="img">      
+            <input type="submit" class="form-control mb-4">
+         </form>
+
+    </div>
+<%- include('parts/footer') %>

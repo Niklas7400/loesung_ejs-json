@@ -1,0 +1,9 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar', {navItems}) %>
+    <div class="container"></div>
+        <h1 class="bd-title my-4" id="content"><%= title %></h1>
+        <% if(typeof(post) !=='undefined' ) { %>
+            <%- include('parts/card', {post, singleView}) %>
+        <% }; %>
+    </div>
+<%- include('parts/footer') %>

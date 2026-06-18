@@ -1,0 +1,17 @@
+[
+  {
+    "id": 0,
+    "date": "2026-05-20T06:30:36.279Z",
+    "author": "ich",
+    "title": "mein Titel",
+    "text": "mein Text"
+  },
+  {
+    "id": 1,
+    "date": "2026-05-22T06:30:36.279Z",
+    "author": "du",
+    "title": "mit bild",
+    "text": "mein Text",
+    "img": "/uploads/Face-smile.svg.png"
+  }
+]

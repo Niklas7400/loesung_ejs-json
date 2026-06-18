@@ -1,0 +1,16 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar', {navItems}) %>
+    <div class="container"></div>
+        <h1 class="bd-title my-4" id="content"><%= title %></h1>
+        <div class="btn-group mb-4" role="group" aria-label="Basic outlined example">
+            <a href="/blog?sort=id" type="button" class="btn btn-outline-primary">by ID</a>
+            <a href="/blog?sort=date" type="button" class="btn btn-outline-primary">by Date</a>
+            <a href="/blog?sort=author" type="button" class="btn btn-outline-primary">by Author</a>
+        </div>
+        <% if(typeof(blog) !=='undefined' ) { %>
+            <% blog.forEach(post=> { %>
+                <%- include('parts/card', {post, singleView}) %>
+            <% }); %>
+        <% } %>
+    </div>
+<%- include('parts/footer') %>
