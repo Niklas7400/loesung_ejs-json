@@ -1,0 +1,16 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar', {navItems}) %>
+    <div class="container"></div>
+        <h1 class="bd-title my-4" id="content"><%= title %></h1>
+        
+        <form action="/auth/login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+        </form> 
+    </div>
+<%- include('parts/footer') %>
