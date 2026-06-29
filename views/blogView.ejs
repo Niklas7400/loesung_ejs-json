@@ -1,0 +1,29 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar', {navItems}) %>
+<div class="container">
+    <h1 class="bd-title my-4" id="content"><%= title %></h1>
+    <div id="blog-list"></div>
+</div>
+<script>
+    async function loadPosts() {
+        const response = await fetch('/api/blog');
+        const posts = await response.json();
+        let html = '';
+        posts.forEach(post => {
+            html += `
+                <div class="card mb-4">
+                    <div class='card-header'>
+                        ${post.author} schrieb am ${new Date(post.date).toLocaleString('de-DE')}
+                    </div>
+                    <div class='card-body'>
+                        <h5 class='card-title'>${post.title}</h5>
+                        <p class='card-text'>${post.text}</p>
+                    </div>
+                </div>
+            `;
+        });
+        document.getElementById('blog-list').innerHTML = html;
+    }
+    loadPosts();
+</script>
+<%- include('parts/footer') %>
