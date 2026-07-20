@@ -1,4 +1,5 @@
 var blogModel = require('../models/blogModel');
+var { validatePost } = require('../validators/blogValidator');
 
 exports.list = function (req, res, next) {
     let sortQuery = req.query.sort ? req.query.sort : "id";
@@ -23,10 +24,15 @@ exports.show = function (req, res, next) {
 };
 
 exports.create = function (req, res, next) {
+    let errors = validatePost(req.body);
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({ errors });
+    }
     let newPost = {
         date: new Date(),
         author: req.body.author,
         title: req.body.title,
+        email: req.body.email,
         text: req.body.text,
     };
     blogModel.addPost(newPost);
@@ -34,6 +40,10 @@ exports.create = function (req, res, next) {
 };
 
 exports.update = function (req, res, next) {
+    let errors = validatePost(req.body);
+    if (Object.keys(errors).length > 0) {
+        return res.status(400).json({ errors });
+    }
     let searchID = req.params.postID;
     let found = blogModel.updatePost(searchID, req.body);
     if (found) {
