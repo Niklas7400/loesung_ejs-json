@@ -1,0 +1,77 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar', {navItems}) %>
+<div class="container">
+    <h1 class="bd-title my-4" id="content"><%= title %></h1>
+
+    <div id="formErrors" class="alert alert-danger" style="display:none"></div>
+
+    <form id="postForm">
+        <label for="author">Author</label>
+        <input type="text" class="form-control" id="author" name="author">
+        <label for="title">Titel</label>
+        <input type="text" class="form-control" id="title" name="title">
+        <label for="email">E-Mail</label>
+        <input type="email" class="form-control" id="email" name="email">
+        <label for="text">Text</label>
+        <textarea class="form-control" id="text" name="text"></textarea>
+        <input type="submit" class="btn btn-primary mb-4" value="Speichern">
+    </form>
+</div>
+<script>
+    const postID = "<%= typeof(postID) !== 'undefined' ? postID : '' %>";
+
+    async function loadExistingPost() {
+        if (!postID) {
+            return;
+        }
+        const response = await fetch(`/api/blog/${postID}`);
+        const post = await response.json();
+        document.getElementById('author').value = post.author;
+        document.getElementById('title').value = post.title;
+        document.getElementById('email').value = post.email || '';
+        document.getElementById('text').value = post.text;
+    }
+
+    function showErrors(errors) {
+        const errorBox = document.getElementById('formErrors');
+        const messages = Object.values(errors);
+        errorBox.innerHTML = messages.join('<br>');
+        errorBox.style.display = 'block';
+    }
+
+    document.getElementById('postForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const data = {
+            author: document.getElementById('author').value,
+            title: document.getElementById('title').value,
+            email: document.getElementById('email').value,
+            text: document.getElementById('text').value
+        };
+
+        let response;
+        if (postID) {
+            response = await fetch(`/api/blog/${postID}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+        } else {
+            response = await fetch('/api/blog', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+        }
+
+        if (response.ok) {
+            window.location.href = '/views/blog';
+        } else {
+            const result = await response.json();
+            showErrors(result.errors || { general: 'Speichern fehlgeschlagen.' });
+        }
+    });
+
+    loadExistingPost();
+</script>
+<%- include('parts/footer') %>

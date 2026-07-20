@@ -31,11 +31,11 @@ app.use(fileupload({
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/blog', apiRouter);
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
 app.use('/views', viewsRouter);
 app.use('/auth', authRouter);
+app.use('/', indexRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

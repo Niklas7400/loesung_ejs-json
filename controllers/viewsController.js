@@ -4,11 +4,11 @@ let navItems = [
         name: "Home"
     },
     {
-        link: "/blog",
+        link: "/views/blog",
         name: "Blog"
     },
     {
-        link: "/blog/newPost",
+        link: "/views/blog/new",
         name: "Neuer Post"
     }
 ]
@@ -19,3 +19,26 @@ exports.list = function (req, res, next) {
         navItems
     });
 };
+
+exports.newForm = function (req, res, next) {
+    res.render('postEditView', {
+        title: 'Neuer Post',
+        navItems
+    });
+}
+
+exports.editForm = function (req, res, next) {
+    res.render('postEditView', {
+        postID: req.params.postID,
+        title: 'Post bearbeiten',
+        navItems
+    });
+}
+
+exports.show = function (req, res, next) {
+    res.render('postView', {
+        postID: req.params.postID,
+        title: 'Post anzeigen',
+        navItems
+    });
+}

@@ -7,11 +7,16 @@
     "text": "mein Text"
   },
   {
-    "id": 1,
-    "date": "2026-05-22T06:30:36.279Z",
-    "author": "du",
+    "author": "Ich",
     "title": "mit bild",
     "text": "mein Text",
-    "img": "/uploads/Face-smile.svg.png"
+    "id": 1
+  },
+  {
+    "date": "2026-07-01T07:15:12.800Z",
+    "author": "Niklas",
+    "title": "Test",
+    "text": "Test Test Test",
+    "id": 2
   }
 ]
