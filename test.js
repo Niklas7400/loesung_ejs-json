@@ -130,3 +130,49 @@ router.get('/api/posts/count/:author', (req, res) => {
     const count = countPostsByAuthor(req.params.author.trim());
     res.json({ count });
 });
+
+router.get('/todos/:id', (req, res) => {
+    let searchID = req.params.id;
+    let found = todos.find(todos => todos.id == searchID);
+        if (found) {
+            res.status(200).json(found);
+        } else {
+            res.status(404).json({ error: "not found" });
+        }
+});
+
+function parsePrice(input) {
+    const parseResult = parseFloat(input);
+    if (isNaN(parseResult)) {
+        return null;
+    }
+    return parseResult;
+}
+
+app.get('/api/users', (req, res) => {
+  const users = await User.findAll();
+  res.json(users);
+});
+
+function requireAuth(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    res.status(401).json({ error: 'unauthorized' });
+  }
+}
+
+function getUserRole(user) {
+  if (user.role === 'admin') {
+    return 'Admin-Zugriff';
+  }
+  return 'Standard-Zugriff';
+}
+
+function isValidAge(input) {
+    const age = parseInt(input);
+    if (isNaN(age) || age < 0 || age > 120) {
+        return false;
+    }
+    return true;
+}
